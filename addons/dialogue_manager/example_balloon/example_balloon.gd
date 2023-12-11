@@ -5,7 +5,6 @@ extends CanvasLayer
 @onready var character_label: RichTextLabel = %CharacterLabel
 @onready var dialogue_label: DialogueLabel = %DialogueLabel
 @onready var responses_menu: DialogueResponsesMenu = %ResponsesMenu
-
 ## The dialogue resource
 var resource: DialogueResource
 
@@ -25,6 +24,7 @@ var dialogue_line: DialogueLine:
 
 		# The dialogue has finished so close the balloon
 		if not next_dialogue_line:
+			Global.player.can_move = true
 			queue_free()
 			return
 

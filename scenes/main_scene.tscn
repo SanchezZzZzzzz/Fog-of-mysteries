@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dnj320p8ncron"]
+[gd_scene load_steps=13 format=3 uid="uid://dnj320p8ncron"]
 
 [ext_resource type="PackedScene" uid="uid://bk4vr5p2qjdnm" path="res://scenes/player.tscn" id="1_hclf2"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_js4mq"]
 [ext_resource type="PackedScene" uid="uid://dtv0q7ude30qe" path="res://scenes/interface.tscn" id="2_qwg3a"]
 [ext_resource type="PackedScene" uid="uid://bykql2xuhc275" path="res://scenes/ingame_menu.tscn" id="4_esumr"]
+[ext_resource type="PackedScene" uid="uid://bes71gvtsmylr" path="res://scenes/npc_interaction.tscn" id="5_rxrki"]
 [ext_resource type="PackedScene" uid="uid://c4bstrjahhhm" path="res://scenes/NPCs/jesse_pinkman.tscn" id="5_xy70f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rusdk"]
@@ -66,5 +67,9 @@ visible = false
 
 [node name="NPCS" type="Node3D" parent="."]
 
-[node name="Jesse_Pinkman" parent="." instance=ExtResource("5_xy70f")]
+[node name="NpcArea" parent="NPCS" instance=ExtResource("5_rxrki")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.91586, 0, 0)
+label = "Джесси"
+dialogue = "discussion"
+
+[node name="Jesse_Pinkman" parent="NPCS/NpcArea" instance=ExtResource("5_xy70f")]

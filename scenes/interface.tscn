@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://dtv0q7ude30qe"]
+[gd_scene load_steps=10 format=3 uid="uid://dtv0q7ude30qe"]
 
+[ext_resource type="Theme" uid="uid://coqfu4078r8ko" path="res://resources/main_theme.tres" id="1_ma5df"]
 [ext_resource type="Script" path="res://scripts/interface.gd" id="1_swk83"]
 [ext_resource type="Texture2D" uid="uid://ba4485pwwro2o" path="res://images/crosshair.png" id="2_86ya1"]
 [ext_resource type="Script" path="res://scripts/inventory.gd" id="3_7o7y1"]
@@ -52,6 +53,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
+theme = ExtResource("1_ma5df")
 script = ExtResource("1_swk83")
 
 [node name="Crosshair" type="TextureRect" parent="."]
