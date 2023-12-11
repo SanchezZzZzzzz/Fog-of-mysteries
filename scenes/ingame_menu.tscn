@@ -1,0 +1,79 @@
+[gd_scene load_steps=4 format=3 uid="uid://bykql2xuhc275"]
+
+[ext_resource type="Theme" uid="uid://coqfu4078r8ko" path="res://resources/main_theme.tres" id="1_upfkv"]
+[ext_resource type="Script" path="res://scripts/ingame_menu.gd" id="2_0sy1f"]
+[ext_resource type="AudioStream" uid="uid://fsmk6405lc6c" path="res://audio/interface/Button_press.mp3" id="3_gtu8p"]
+
+[node name="Ingame_menu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_upfkv")
+script = ExtResource("2_0sy1f")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.5
+offset_top = -74.0
+offset_right = 101.5
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Continue" type="Button" parent="VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Продолжить"
+
+[node name="Settings" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Настройки"
+
+[node name="Exit_to_menu" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Выйти в меню"
+
+[node name="Exit_to_desktop" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Выйти из игры"
+
+[node name="Pause" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.450521
+anchor_top = 0.394858
+anchor_right = 0.546
+anchor_bottom = 0.421
+offset_left = -39.0002
+offset_top = -40.868
+offset_right = -100.992
+offset_bottom = -34.808
+grow_horizontal = 2
+grow_vertical = 2
+text = "Пауза"
+
+[node name="Button_press" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_gtu8p")
+
+[connection signal="button_up" from="VBoxContainer/Continue" to="." method="_on_continue_button_up"]
+[connection signal="mouse_entered" from="VBoxContainer/Continue" to="." method="_on_continue_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="button_up" from="VBoxContainer/Settings" to="." method="_on_settings_button_up"]
+[connection signal="mouse_entered" from="VBoxContainer/Settings" to="." method="_on_settings_mouse_entered"]
+[connection signal="button_up" from="VBoxContainer/Exit_to_menu" to="." method="_on_exit_to_menu_button_up"]
+[connection signal="focus_entered" from="VBoxContainer/Exit_to_menu" to="." method="_on_exit_to_menu_focus_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/Exit_to_menu" to="." method="_on_exit_to_menu_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Exit_to_menu" to="." method="_on_exit_to_menu_pressed"]
+[connection signal="button_up" from="VBoxContainer/Exit_to_desktop" to="." method="_on_exit_to_desktop_button_up"]
+[connection signal="focus_entered" from="VBoxContainer/Exit_to_desktop" to="." method="_on_exit_to_desktop_focus_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/Exit_to_desktop" to="." method="_on_exit_to_desktop_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Exit_to_desktop" to="." method="_on_exit_to_desktop_pressed"]

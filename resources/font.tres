@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://dqcpy6d4n4yar"]
+
+[ext_resource type="FontFile" uid="uid://uproitfek0vk" path="res://resources/pixel-anchor-jack_0.ttf" id="1_i8tmr"]
+
+[resource]
+base_font = ExtResource("1_i8tmr")
