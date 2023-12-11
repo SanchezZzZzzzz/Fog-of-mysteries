@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtv0q7ude30qe"]
+[gd_scene load_steps=9 format=3 uid="uid://dtv0q7ude30qe"]
 
 [ext_resource type="Script" path="res://scripts/interface.gd" id="1_swk83"]
 [ext_resource type="Texture2D" uid="uid://ba4485pwwro2o" path="res://images/crosshair.png" id="2_86ya1"]
 [ext_resource type="Script" path="res://scripts/inventory.gd" id="3_7o7y1"]
+[ext_resource type="Theme" uid="uid://dag5otw3s2rr" path="res://resources/UI/inventory.tres" id="3_nmeos"]
+
+[sub_resource type="Theme" id="Theme_7o8df"]
 
 [sub_resource type="Animation" id="Animation_vveq2"]
 resource_name = "Notification animation"
@@ -84,6 +87,7 @@ anchor_bottom = 0.135
 offset_bottom = 560.52
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_nmeos")
 script = ExtResource("3_7o7y1")
 
 [node name="ItemList" type="ItemList" parent="Inventory"]
@@ -93,6 +97,7 @@ anchor_right = 1.0
 anchor_bottom = 0.142
 offset_bottom = -0.0160065
 grow_horizontal = 2
+theme = SubResource("Theme_7o8df")
 max_columns = 4
 same_column_width = true
 
