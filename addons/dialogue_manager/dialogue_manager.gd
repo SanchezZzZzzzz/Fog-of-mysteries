@@ -258,10 +258,10 @@ func create_resource_from_text(text: String) -> Resource:
 
 
 ## Show the example balloon
-func show_example_dialogue_balloon(resource: DialogueResource, title: String = "", extra_game_states: Array = []) -> CanvasLayer:
+func show_example_dialogue_balloon(resource: DialogueResource, title: String = "", extra_game_states: Array = [], voiceover_path: String = "", voice_node: Node3D = null) -> CanvasLayer:
 	var balloon: Node = load(_get_example_balloon_path()).instantiate()
 	get_current_scene.call().add_child(balloon)
-	balloon.start(resource, title, extra_game_states)
+	balloon.start(resource, title, extra_game_states, voiceover_path, voice_node)
 
 	return balloon
 
@@ -314,7 +314,7 @@ func get_line(resource: DialogueResource, key: String, extra_game_states: Array)
 	var stack: Array = key.split("|")
 	key = stack.pop_front()
 	var id_trail: String = "" if stack.size() == 0 else "|" + "|".join(stack)
-
+	var audio_file: String = ""
 	# Key is blank so just use the first title
 	if key == null or key == "":
 		key = resource.first_title
@@ -331,9 +331,13 @@ func get_line(resource: DialogueResource, key: String, extra_game_states: Array)
 	# See if it is a title
 	if key.begins_with("~ "):
 		key = key.substr(2)
+		
+	
 	if resource.titles.has(key):
 		key = resource.titles.get(key)
+	
 
+	
 	if key in resource.titles.values():
 		passed_title.emit(resource.titles.find_key(key))
 
@@ -372,7 +376,7 @@ func get_line(resource: DialogueResource, key: String, extra_game_states: Array)
 
 	# Set up a line object
 	var line: DialogueLine = await create_dialogue_line(data, extra_game_states)
-
+	
 	# If the jump point somehow has no content then just end
 	if not line: return null
 

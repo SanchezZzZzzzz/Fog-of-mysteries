@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dnj320p8ncron"]
+[gd_scene load_steps=15 format=3 uid="uid://dnj320p8ncron"]
 
 [ext_resource type="PackedScene" uid="uid://bk4vr5p2qjdnm" path="res://scenes/player.tscn" id="1_hclf2"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_js4mq"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bykql2xuhc275" path="res://scenes/ingame_menu.tscn" id="4_esumr"]
 [ext_resource type="PackedScene" uid="uid://bes71gvtsmylr" path="res://scenes/npc_interaction.tscn" id="5_rxrki"]
 [ext_resource type="PackedScene" uid="uid://c4bstrjahhhm" path="res://scenes/NPCs/jesse_pinkman.tscn" id="5_xy70f"]
+[ext_resource type="AudioStream" uid="uid://cdcj5ve63svs0" path="res://audio/environment/Jazz.mp3" id="7_ppaeg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rusdk"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -22,17 +23,25 @@ glow_enabled = true
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7qegc"]
+albedo_color = Color(0.270588, 0.290196, 0, 1)
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_adon4"]
+material = SubResource("StandardMaterial3D_7qegc")
 size = Vector2(20, 20)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_08lvw"]
 data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
 
 [sub_resource type="FogMaterial" id="FogMaterial_l3kq4"]
-emission = Color(0.683118, 0.00182781, 0.861692, 1)
+albedo = Color(0, 0.656784, 0.720608, 1)
 
 [node name="Main_scene" type="Node3D"]
 script = ExtResource("1_js4mq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_t5f8b")
@@ -46,7 +55,7 @@ mesh = SubResource("PlaneMesh_adon4")
 shape = SubResource("ConcavePolygonShape3D_08lvw")
 
 [node name="Player" parent="." instance=ExtResource("1_hclf2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.53977, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.893763, 0)
 
 [node name="Interface" parent="." instance=ExtResource("2_qwg3a")]
 
@@ -58,6 +67,7 @@ material = SubResource("FogMaterial_l3kq4")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.692638, -7.00739)
+light_color = Color(0.866667, 0, 0.368627, 1)
 light_energy = 12.615
 shadow_enabled = true
 omni_range = 1.025
@@ -71,5 +81,12 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.91586, 0, 0)
 label = "Джесси"
 dialogue = "discussion"
+voiceover_path = "res://audio/dialogues/headman"
 
 [node name="Jesse_Pinkman" parent="NPCS/NpcArea" instance=ExtResource("5_xy70f")]
+
+[node name="Ambient" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_ppaeg")
+volume_db = -22.286
+autoplay = true
+bus = &"Music"

@@ -79,7 +79,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 
 
 ## Start some dialogue
-func start(dialogue_resource: DialogueResource, title: String, extra_game_states: Array = []) -> void:
+func start(dialogue_resource: DialogueResource, title: String, extra_game_states: Array = [],  voiceover_path: String = "", voice_node: Node3D = null) -> void:
 	temporary_game_states =  [self] + extra_game_states
 	is_waiting_for_input = false
 	resource = dialogue_resource

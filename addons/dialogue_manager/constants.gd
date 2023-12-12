@@ -6,6 +6,7 @@ const CACHE_PATH = "user://dialogue_manager_cache.json"
 
 # Token types
 
+const TOKEN_EXCLAIMATION_POINT = "exclaimation_point"
 const TOKEN_FUNCTION = "function"
 const TOKEN_DICTIONARY_REFERENCE = "dictionary_reference"
 const TOKEN_DICTIONARY_NESTED_REFERENCE = "dictionary_nested_reference"

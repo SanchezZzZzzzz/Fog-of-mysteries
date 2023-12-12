@@ -1,13 +1,17 @@
 ~ discussion
 
-Nathan: [[Hi|Hello|Howdy]], this is some dialogue.
-Nathan: Here are some choices.
-- First one
-	Nathan: You picked the first one.
-- Second one
-	Nathan: You picked the second one.
-- Start again => discussion
-- End the conversation => END
-Nathan: For more information see the online documentation.
+Джесси: Эй ты, наконец-то ты проснулся.
+!3
+Джесси: Как думаешь, куда мы направляемся.
+- Не знаю
+	Я: не имею малейшего понятия
+	Джесси: Что ж, тебе это понравится.
+	=> END
+- Диснейленд?
+	Я: неужто Диснейленд?
+	Джесси: Ты прав, будем там через час.
+	=> END
+- Не загадывай ребусов, говори прямо => END
+Джесси: Не скажу
 
 => END
