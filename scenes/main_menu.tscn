@@ -1,0 +1,193 @@
+[gd_scene load_steps=8 format=3 uid="uid://b085vwusvrp84"]
+
+[ext_resource type="Theme" uid="uid://coqfu4078r8ko" path="res://resources/main_theme.tres" id="1_y5a60"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_mldbb"]
+[ext_resource type="AudioStream" uid="uid://dg7ulu7a5rajd" path="res://audio/menu/main_menu.mp3" id="2_rir67"]
+[ext_resource type="Script" path="res://scripts/interface/InterfaceSound.gd" id="4_335ts"]
+[ext_resource type="Script" path="res://scripts/interface/settingsmenu.gd" id="4_j4ydg"]
+[ext_resource type="AudioStream" uid="uid://fsmk6405lc6c" path="res://audio/interface/Button_press.mp3" id="5_xvmmp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_t6ng3"]
+font_size = 42
+outline_size = 4
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="Main_menu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_y5a60")
+script = ExtResource("2_mldbb")
+
+[node name="Title" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Title"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu_buttons" type="MarginContainer" parent="Title"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -146.0
+offset_top = -55.0
+offset_right = 146.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Buttons_container" type="VBoxContainer" parent="Title/Menu_buttons"]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="Title/Menu_buttons/Buttons_container"]
+layout_mode = 2
+text = "Начать путешествие"
+
+[node name="Options" type="Button" parent="Title/Menu_buttons/Buttons_container"]
+layout_mode = 2
+text = "Настройки"
+
+[node name="Quit" type="Button" parent="Title/Menu_buttons/Buttons_container"]
+layout_mode = 2
+text = "Выйти из игры"
+
+[node name="Main_menu_music" type="AudioStreamPlayer" parent="Title"]
+stream = ExtResource("2_rir67")
+volume_db = -20.0
+autoplay = true
+
+[node name="Title" type="Label" parent="Title"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -288.0
+offset_top = -142.0
+offset_right = 288.0
+offset_bottom = -76.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Туман загадок"
+label_settings = SubResource("LabelSettings_t6ng3")
+
+[node name="Settings" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_j4ydg")
+
+[node name="Back" type="Button" parent="Settings"]
+offset_left = 560.0
+offset_top = 392.0
+offset_right = 605.0
+offset_bottom = 423.0
+text = "Назад"
+
+[node name="Music" type="AudioStreamPlayer" parent="Settings"]
+stream = ExtResource("2_rir67")
+bus = &"Music"
+
+[node name="Button_press" type="AudioStreamPlayer" parent="Settings"]
+stream = ExtResource("5_xvmmp")
+
+[node name="Resolution_container" type="HBoxContainer" parent="Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 488.0
+offset_top = 223.0
+offset_right = -376.0
+offset_bottom = -385.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Window_mode" type="CheckButton" parent="Settings/Resolution_container"]
+layout_mode = 2
+text = "Полный экран/окно
+"
+
+[node name="Resolution" type="Label" parent="Settings/Resolution_container"]
+layout_mode = 2
+text = "Разрешение"
+
+[node name="VSeparator" type="VSeparator" parent="Settings/Resolution_container"]
+layout_mode = 2
+
+[node name="MenuButton" type="MenuButton" parent="Settings/Resolution_container"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 471.0
+offset_top = 272.0
+offset_right = 723.0
+offset_bottom = 368.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Interface" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Звуки интерфейса"
+
+[node name="InterfaceSound" type="HSlider" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.001
+script = ExtResource("4_335ts")
+bus_name = "Interface"
+
+[node name="Music" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Музыка"
+
+[node name="MusicSound" type="HSlider" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.001
+script = ExtResource("4_335ts")
+bus_name = "Music"
+
+[node name="Version" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 900.0
+offset_top = 599.0
+offset_right = -16.0
+offset_bottom = -20.0
+grow_horizontal = 2
+text = "Pre-Release 0.9.5"
+
+[connection signal="pressed" from="Title/Menu_buttons/Buttons_container/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Title/Menu_buttons/Buttons_container/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Title/Menu_buttons/Buttons_container/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Settings/Back" to="." method="_on_back_pressed"]
+[connection signal="toggled" from="Settings/Resolution_container/Window_mode" to="Settings" method="_on_window_mode_toggled"]

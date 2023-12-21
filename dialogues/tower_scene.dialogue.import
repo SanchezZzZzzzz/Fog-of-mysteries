@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://dttstre80kdfu"
+path="res://.godot/imported/tower_scene.dialogue-97bd7bb49280875c22bf6b6c5e59c1e6.tres"
+
+[deps]
+
+source_file="res://dialogues/tower_scene.dialogue"
+dest_files=["res://.godot/imported/tower_scene.dialogue-97bd7bb49280875c22bf6b6c5e59c1e6.tres"]
+
+[params]
+
+defaults=true

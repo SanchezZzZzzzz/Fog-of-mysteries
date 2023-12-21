@@ -1,0 +1,151 @@
+[gd_scene load_steps=11 format=3 uid="uid://dtv0q7ude30qe"]
+
+[ext_resource type="Theme" uid="uid://coqfu4078r8ko" path="res://resources/main_theme.tres" id="1_ma5df"]
+[ext_resource type="Script" path="res://scripts/interface.gd" id="1_swk83"]
+[ext_resource type="Texture2D" uid="uid://ba4485pwwro2o" path="res://images/crosshair.png" id="2_86ya1"]
+[ext_resource type="Script" path="res://scripts/inventory.gd" id="3_7o7y1"]
+[ext_resource type="Theme" uid="uid://dag5otw3s2rr" path="res://resources/UI/inventory.tres" id="3_nmeos"]
+
+[sub_resource type="Theme" id="Theme_7o8df"]
+
+[sub_resource type="Animation" id="Animation_vveq2"]
+resource_name = "Notification animation"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 3.3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-482, 58), Vector2(123, 58), Vector2(123, 58), Vector2(-482, 58)]
+}
+
+[sub_resource type="Animation" id="Animation_qf5s5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-482, 58)]
+}
+
+[sub_resource type="Animation" id="Animation_auj17"]
+resource_name = "Fade_screen"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e7r2d"]
+_data = {
+"Fade_screen": SubResource("Animation_auj17"),
+"Notification animation": SubResource("Animation_vveq2"),
+"RESET": SubResource("Animation_qf5s5")
+}
+
+[node name="Interface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_ma5df")
+script = ExtResource("1_swk83")
+
+[node name="Crosshair" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_86ya1")
+
+[node name="Label" type="Label" parent="Crosshair"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.234
+anchor_top = 0.078
+anchor_right = 1.234
+anchor_bottom = 0.078
+offset_left = 0.0239944
+offset_top = 0.0079999
+offset_right = 115.024
+offset_bottom = 60.008
+
+[node name="Notification_timer" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="Inventory" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.135
+offset_bottom = 560.52
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_nmeos")
+script = ExtResource("3_7o7y1")
+
+[node name="ItemList" type="ItemList" parent="Inventory"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.142
+offset_bottom = -0.0160065
+grow_horizontal = 2
+theme = SubResource("Theme_7o8df")
+max_columns = 4
+same_column_width = true
+
+[node name="Interface_animation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Notification")
+libraries = {
+"": SubResource("AnimationLibrary_e7r2d")
+}
+
+[node name="Notification" type="Label" parent="."]
+layout_mode = 0
+offset_left = -482.0
+offset_top = 58.0
+offset_right = -31.0001
+offset_bottom = 109.0
+
+[node name="Black_Screen" type="ColorRect" parent="."]
+visible = false
+layout_mode = 2
+anchor_right = 28.85
+anchor_bottom = 16.2
+offset_left = -55.0
+offset_top = -68.0
+offset_right = -1209.0
+offset_bottom = -716.0
+color = Color(0, 0, 0, 1)
+
+[node name="Black_Screen" type="Control" parent="Black_Screen"]
+visible = false
+anchors_preset = 0
+offset_left = 55.0
+offset_top = 68.0
+offset_right = 95.0
+offset_bottom = 108.0
+
+[node name="FPS" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.926
+anchor_bottom = 1.0
+offset_left = 29.0
+offset_top = 17.0
+offset_right = -997.752
+offset_bottom = -605.0

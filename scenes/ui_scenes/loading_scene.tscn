@@ -1,0 +1,180 @@
+[gd_scene load_steps=12 format=3 uid="uid://q1l5ejuohyat"]
+
+[ext_resource type="Script" path="res://scripts/interface/loading_scene.gd" id="1_73f5c"]
+[ext_resource type="Theme" uid="uid://coqfu4078r8ko" path="res://resources/main_theme.tres" id="2_mo8ed"]
+[ext_resource type="Texture2D" uid="uid://bcom85txfa7yf" path="res://scenes/ui_scenes/Loading_slides/Screen1.png" id="3_k72c0"]
+[ext_resource type="AudioStream" uid="uid://bf8agea6yro6f" path="res://audio/interface/loading_music.mp3" id="4_nbwud"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3fr4p"]
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_vsbrl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bfs3k"]
+resource_name = "Slide_animation"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.82, 0.82)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 4.4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ydjic"]
+_data = {
+"RESET": SubResource("Animation_vsbrl"),
+"Slide_animation": SubResource("Animation_bfs3k")
+}
+
+[sub_resource type="Animation" id="Animation_us10u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Loading_finished:label_settings:font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_13qjf"]
+resource_name = "label_blinker"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Loading_finished:label_settings:font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iheao"]
+_data = {
+"RESET": SubResource("Animation_us10u"),
+"label_blinker": SubResource("Animation_13qjf")
+}
+
+[node name="Loading_scene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_73f5c")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -113.0
+offset_top = -109.0
+offset_right = 323.0
+offset_bottom = 121.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.286275, 0.286275, 0.286275, 1)
+
+[node name="Slides" type="TextureRect" parent="."]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -393.0
+offset_top = -109.0
+offset_right = 796.0
+offset_bottom = 323.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_k72c0")
+stretch_mode = 5
+
+[node name="Loading_finished" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.278
+anchor_top = 0.48
+anchor_right = 0.722
+anchor_bottom = 0.52
+offset_left = -0.256042
+offset_top = 188.96
+offset_right = 0.25592
+offset_bottom = 189.04
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_mo8ed")
+label_settings = SubResource("LabelSettings_3fr4p")
+horizontal_alignment = 1
+
+[node name="Slides_animation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Slides")
+libraries = {
+"": SubResource("AnimationLibrary_ydjic")
+}
+
+[node name="Loading_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_nbwud")
+volume_db = -20.0
+autoplay = true
+
+[node name="Label_animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_iheao")
+}
+
+[connection signal="animation_finished" from="Slides_animation" to="." method="_on_slides_animation_animation_finished"]

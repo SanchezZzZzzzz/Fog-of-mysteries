@@ -1,0 +1,75 @@
+[gd_scene load_steps=14 format=3 uid="uid://dnj320p8ncron"]
+
+[ext_resource type="PackedScene" uid="uid://bk4vr5p2qjdnm" path="res://scenes/player.tscn" id="1_hclf2"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_js4mq"]
+[ext_resource type="PackedScene" uid="uid://dtv0q7ude30qe" path="res://scenes/interface.tscn" id="2_qwg3a"]
+[ext_resource type="PackedScene" uid="uid://bykql2xuhc275" path="res://scenes/ingame_menu.tscn" id="4_esumr"]
+[ext_resource type="PackedScene" uid="uid://bes71gvtsmylr" path="res://scenes/npc_interaction.tscn" id="5_rxrki"]
+[ext_resource type="PackedScene" uid="uid://c4bstrjahhhm" path="res://scenes/NPCs/jesse_pinkman.tscn" id="5_xy70f"]
+[ext_resource type="AudioStream" uid="uid://cdcj5ve63svs0" path="res://audio/environment/Jazz.mp3" id="7_ppaeg"]
+[ext_resource type="PackedScene" uid="uid://cbea0eqd1mhut" path="res://scenes/location_transition.tscn" id="8_h180a"]
+[ext_resource type="PackedScene" uid="uid://rl7qq73gtybf" path="res://scenes/range/range.tscn" id="10_jnk8p"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rusdk"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_h4tc3"]
+sky_material = SubResource("ProceduralSkyMaterial_rusdk")
+
+[sub_resource type="Environment" id="Environment_t5f8b"]
+background_mode = 2
+sky = SubResource("Sky_h4tc3")
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+
+[sub_resource type="FogMaterial" id="FogMaterial_hiech"]
+emission = Color(0.92549, 0, 0, 1)
+
+[node name="Main_scene" type="Node3D"]
+script = ExtResource("1_js4mq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+visible = false
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_t5f8b")
+
+[node name="Player" parent="." instance=ExtResource("1_hclf2")]
+transform = Transform3D(0.513047, 0, -0.858361, 0, 1, 0, 0.858361, 0, 0.513047, -5.07326, -0.688278, 0)
+
+[node name="Interface" parent="." instance=ExtResource("2_qwg3a")]
+
+[node name="Ingame_menu" parent="." instance=ExtResource("4_esumr")]
+visible = false
+
+[node name="NPCS" type="Node3D" parent="."]
+
+[node name="NpcArea" parent="NPCS" instance=ExtResource("5_rxrki")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.91586, -1.51923, 0)
+label = "Джесси"
+dialogue = "discussion"
+voiceover_path = "res://audio/dialogues/headman"
+
+[node name="Jesse_Pinkman" parent="NPCS/NpcArea" instance=ExtResource("5_xy70f")]
+
+[node name="Ambient" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_ppaeg")
+volume_db = -22.286
+autoplay = true
+bus = &"Music"
+
+[node name="Location_transition" parent="." node_paths=PackedStringArray("object_trigger") instance=ExtResource("8_h180a")]
+transform = Transform3D(-0.968666, 0, -0.248369, 0, 1, 0, 0.248369, 0, -0.968666, 7.68094, -0.553125, -0.740885)
+object_trigger = NodePath("../Player")
+transist_to = "res://scenes/tower.tscn"
+location = "Player_start_location"
+
+[node name="FogVolume" type="FogVolume" parent="Location_transition"]
+material = SubResource("FogMaterial_hiech")
+
+[node name="Room" parent="." instance=ExtResource("10_jnk8p")]

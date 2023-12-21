@@ -1,0 +1,186 @@
+{
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 2652,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 946,
+      "max": [
+        1.01901316642761,
+        1.01901304721832,
+        2.55124092102051
+      ],
+      "min": [
+        -1.01901316642761,
+        -1.0190132856369,
+        -1.00000047683716
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 946,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 946,
+      "type": "VEC2"
+    }
+  ],
+  "asset": {
+    "generator": "Adobe Substance 3D Painter 7.4.2",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 10608,
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 11352,
+      "byteOffset": 10608,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 11352,
+      "byteOffset": 21960,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 7568,
+      "byteOffset": 33312,
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 40880,
+      "uri": "Untitled.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "barrelred_baseColor.png"
+    },
+    {
+      "uri": "barrelred_occlusionRoughnessMetallic.png"
+    },
+    {
+      "uri": "barrelred_normal.png"
+    }
+  ],
+  "materials": [
+    {
+      "alphaMode": "OPAQUE",
+      "name": "barrelred",
+      "normalTexture": {
+        "index": 2
+      },
+      "occlusionTexture": {
+        "index": 1
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicRoughnessTexture": {
+          "index": 1
+        }
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "barrelred",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 2,
+            "POSITION": 1,
+            "TEXCOORD_0": 3
+          },
+          "indices": 0,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "barrelred",
+      "rotation": [
+        -0.70710688829422,
+        0.0,
+        0.0,
+        0.707106649875641
+      ],
+      "scale": [
+        100.0,
+        100.0,
+        100.0
+      ],
+      "translation": [
+        0.0,
+        101.923667907715,
+        0.0
+      ]
+    },
+    {
+      "mesh": 0,
+      "name": "barrelred"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9985,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    }
+  ]
+}

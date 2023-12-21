@@ -1,0 +1,10 @@
+# Godot 4+ specific ignores
+.godot/
+tower1.blend
+./models/tower/tower1.blend
+./.git/lfs/objects/ca/99/ca99ab080b59b1e2b1bbc194d25231da363a9ccb8f46efc3c6baea5b51f008f5
+./models/tower/tower1.blend
+./.git/lfs/objects/ca/99/ca99ab080b59b1e2b1bbc194d25231da363a9ccb8f46efc3c6baea5b51f008f5
+./models/tower2.rar
+./models/tower/tower1.blend
+./.git/objects/d4/476b964c6309220dc62286af1901f592de4681

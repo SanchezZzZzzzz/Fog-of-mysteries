@@ -1,0 +1,181 @@
+[gd_scene load_steps=6 format=3 uid="uid://872g450bd2g5"]
+
+[ext_resource type="Theme" uid="uid://coqfu4078r8ko" path="res://resources/main_theme.tres" id="1_1he61"]
+[ext_resource type="AudioStream" uid="uid://dg7ulu7a5rajd" path="res://audio/menu/main_menu.mp3" id="2_i2aja"]
+[ext_resource type="Script" path="res://scripts/interface/InterfaceSound.gd" id="2_mdoii"]
+[ext_resource type="AudioStream" uid="uid://fsmk6405lc6c" path="res://audio/interface/Button_press.mp3" id="4_1r31r"]
+
+[sub_resource type="GDScript" id="GDScript_gih71"]
+script/source = "extends Control
+
+#Режим окна
+func _on_window_pressed():
+	if DisplayServer.WINDOW_MODE_FULLSCREEN:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN, false)
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		get_window().size = Vector2i(900, 500)
+	
+	
+#Полноэкранный режим
+func _on_window_full_pressed():
+	if get_window().size < Vector2i(1500, 800):
+		#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED, false)
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
+		
+	#var is_fullscreen = false
+
+		#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
+		#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)  
+
+	
+#func _ready():
+	# Назначьте метод toggle_fullscreen на событие \"pressed\" кнопки
+#	$WindowFull.connect(\"pressed\", self, \"toggle_fullscreen\")
+
+#func toggle_fullscreen():
+	# Получаем текущий статус полноэкранного режима
+#	var is_fullscreen = OS.get_window_fullscreen()
+
+	# Инвертируем статус (переключаем между полноэкранным и оконным режимом)
+#	OS.set_window_fullscreen(!is_fullscreen)
+
+#Переход на основное меню
+func _on_back_pressed():
+	get_tree().change_scene_to_file('res://scenes/menu.tscn')
+	
+#Выпадающее меню настроек разрешения
+@onready var option_button = $HBoxContainer/OptionButton as OptionButton
+
+const WINDOW_MODE_ARRAY : Array[String] = [
+	\"Полноэкранный режим\",
+	\"Режим окна\"
+]
+	
+
+func _ready():
+	add_window_mode_items()
+	option_button.item_selected.connect(on_window_mode_selected)
+	#add_resolution_items()
+	
+func add_window_mode_items() -> void:
+	for window_mode in WINDOW_MODE_ARRAY:
+		option_button.add_item(window_mode)
+	
+func on_window_mode_selected(index : int) -> void:
+	match index:
+		0: 
+			if get_window().size < Vector2i(1500, 800):
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		1:
+			if DisplayServer.WINDOW_MODE_FULLSCREEN:
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN, false)
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+				get_window().size = Vector2i(900, 500)
+	
+	
+	
+	
+func WindowFull():
+	if get_window().size < Vector2i(1500, 800):
+		#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED, false)
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		
+func WindowNotFull():
+	if DisplayServer.WINDOW_MODE_FULLSCREEN:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN, false)
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		get_window().size = Vector2i(900, 500)
+	
+func _on_back_mouse_entered():
+	$Button_press.play()
+"
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_1he61")
+script = SubResource("GDScript_gih71")
+
+[node name="MusicSound" type="HSlider" parent="."]
+layout_mode = 2
+offset_left = 456.0
+offset_top = 288.0
+offset_right = 655.0
+offset_bottom = 319.0
+max_value = 1.0
+step = 0.001
+script = ExtResource("2_mdoii")
+bus_name = "Music"
+
+[node name="Music" type="Label" parent="MusicSound"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = -16.0
+offset_right = 112.0
+offset_bottom = 7.0
+text = "Музыка"
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 2
+offset_left = 560.0
+offset_top = 392.0
+offset_right = 605.0
+offset_bottom = 423.0
+text = "Back"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_i2aja")
+autoplay = true
+bus = &"Music"
+
+[node name="Button_press" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_1r31r")
+autoplay = true
+bus = &"Interface"
+
+[node name="InterfaceSound" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 352.0
+offset_right = 655.0
+offset_bottom = 368.0
+max_value = 1.0
+step = 0.001
+script = ExtResource("2_mdoii")
+bus_name = "Interface"
+
+[node name="Interface" type="Label" parent="InterfaceSound"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = -32.0
+offset_right = 183.0
+offset_bottom = -6.0
+text = "Звуки интерфейса"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 488.0
+offset_top = 223.0
+offset_right = 776.0
+offset_bottom = 263.0
+
+[node name="Permission" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Разрешение"
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[connection signal="button_up" from="Back" to="." method="_on_back_button_up"]
+[connection signal="mouse_entered" from="Back" to="." method="_on_back_mouse_entered"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
